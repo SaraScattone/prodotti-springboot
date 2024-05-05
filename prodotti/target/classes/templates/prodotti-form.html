@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <title>Nuovo prodotto</title>
+</head>
+<body>
+    <div class="col-3">
+        <form method="post" th:action="@{/prodotti/new}" th:object="${prodottiForm}">
+            <h2>Nuovo prodotto</h2>
+            <div>
+                <label>Nome</label>
+                <input th:field="*{nome}" type="text"/>
+
+                <div th:if="${#fields.hasErrors('name')}">
+                    <span th:errors="*{name}" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div>
+                <label>Categoria</label>
+                <input th:field="*{categoria}" type="text"/>
+
+                <div th:if="${#fields.hasErrors('name')}">
+                    <span th:errors="*{name}" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div>
+                <label>Anno di produzione</label>
+                <input th:field="*{annoProduzione}" type="number"/>
+
+                <div th:if="${#fields.hasErrors('annoProduzione')}">
+                    <span th:errors="*{annoProduzione}" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div>
+                <label>Quantità</label>
+                <input th:field="*{quantita}" type="number"/>
+
+                <div th:if="${#fields.hasErrors('quantita')}">
+                    <span th:errors="*{quantita}" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- buttons -->
+            <div>
+                <input class="btn btn-success" type="submit" value="Conferma"/>
+                <input class="btn btn-secondary" type="reset" value="Svuota"/>
+                <a th:href="@{/prodotti}" class="btn btn-primary">Indietro</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

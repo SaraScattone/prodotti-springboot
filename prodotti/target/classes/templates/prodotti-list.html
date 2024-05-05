@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <title>Lista prodotti</title>
+</head>
+<body>
+    <div>
+        <!-- feedback di eliminazione -->
+        <div class="col-3 my-2">
+            <div class="alert alert-info" role="alert" th:if="@{deleted != null}">
+                Prodotto eliminato!
+            </div>
+        </div>
+
+        <header class="my-2">
+            <h2>Lista prodotti</h2>
+            <a th:href="@{/prodotti/new}" class="btn btn-success">Nuovo prodotto</a>
+            <a th:href="@{/prodotti/deleteAll}" class="btn btn-danger">Svuota catalogo</a>
+        </header>
+
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="col-3">Nome</th>
+                    <th class="col-2">Categoria</th>
+                    <th class="col-2">Anno di produzione</th>
+                    <th class="col-2">Quantità</th>
+                    <th class="col-1"></th>
+                    <th class="col-1"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${prodotti}">
+                    <td th:text="${p.nome}"></td>
+                    <td th:text="${p.categoria}"></td>
+                    <td th:text="${p.annoProduzione}"></td>
+                    <td th:text="${p.quantita}"></td>
+
+                    <td>
+                        <a th:href="@{'/prodotti/delete/'+${p.id}}" class="btn btn-danger">Elimina</a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/prodotti/'+${p.id}}" class="btn btn-secondary">Visualizza</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <small th:if="${#lists.isEmpty(prodotti)}">
+            Nessun prodotto inserito
+        </small>
+    </div>
+</body>
+</html>
